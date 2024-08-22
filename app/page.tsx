@@ -4,7 +4,6 @@ import BarberShopItem from "@/app/_components/barbershop-item"
 import { SearchIcon } from "lucide-react"
 import { Button } from "@/app/_components/ui/button"
 import { Input } from "@/app/_components/ui/input"
-import { Card, CardContent } from "@/app/_components/ui/card"
 import { db } from "@/app/_lib/prisma"
 import { quickSearchOptions } from "./_constants/search"
 import BookingItem from "./_components/booking-item"
@@ -82,16 +81,6 @@ const Home = async () => {
           ))}
         </div>
       </div>
-
-      <footer>
-        <Card>
-          <CardContent className="px-5 py-6">
-            <p className="text-sm text-gray-400">
-              © 2024 Copyright <span className="font-bold">Barber Shop</span>
-            </p>
-          </CardContent>
-        </Card>
-      </footer>
     </div>
   )
 }
