@@ -3,7 +3,7 @@ import Footer from "./_components/footer"
 import { Toaster } from "sonner"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
-import Authprovider from './_providers/auth'
+import Authprovider from "./_providers/auth"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -21,10 +21,12 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={inter.className}>
         <Authprovider>
-          {children}
-          <Toaster />
-          <Footer />
+          <div className="flex h-full flex-col">
+            <div className="flex-1"> {children} </div>
+            <Footer />
+          </div>
         </Authprovider>
+        <Toaster />
       </body>
     </html>
   )

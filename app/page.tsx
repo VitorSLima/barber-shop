@@ -1,12 +1,12 @@
 import Image from "next/image"
 import Header from "@/app/_components/header"
 import BarberShopItem from "@/app/_components/barbershop-item"
-import { SearchIcon } from "lucide-react"
 import { Button } from "@/app/_components/ui/button"
-import { Input } from "@/app/_components/ui/input"
 import { db } from "@/app/_lib/prisma"
 import { quickSearchOptions } from "./_constants/search"
 import BookingItem from "./_components/booking-item"
+import Search from "./_components/search"
+
 
 const Home = async () => {
   const barbershops = await db.barbershop.findMany({})
@@ -25,15 +25,12 @@ const Home = async () => {
         <h2 className="text-xl font-bold">Olá, Vitor!</h2>
         <p>Domingo, 18 de agosto.</p>
 
-        {/* BUSCA */}
-        <div className="mt-6 flex items-center gap-2">
-          <Input placeholder="Faça sua busca..." />
-          <Button>
-            <SearchIcon />
-          </Button>
+        <div className="mt-6">
+          <Search />
         </div>
+    
 
-        {/* BUSCA RÁPIDO  */}
+        {/* BUSCA RÁPIDA  */}
         <div className="mt-6 flex gap-3 overflow-x-scroll [&::-webkit-scrollbar]:hidden">
           {quickSearchOptions.map((option) => (
             <Button key={option.title} className="gap-2" variant="secondary">
