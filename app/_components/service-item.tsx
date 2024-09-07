@@ -13,7 +13,7 @@ import {
 } from "./ui/sheet"
 import { Calendar } from "./ui/calendar"
 import { ptBR } from "date-fns/locale"
-import { addDays, format, isPast, isToday, set } from "date-fns"
+import { format, isPast, isToday, set } from "date-fns"
 import { useEffect, useMemo, useState } from "react"
 import { useSession } from "next-auth/react"
 import { createBooking } from "../_actions/create-booking"
