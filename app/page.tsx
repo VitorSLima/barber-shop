@@ -2,7 +2,6 @@ import Image from "next/image"
 import Header from "@/app/_components/header"
 import BarberShopItem from "@/app/_components/barbershop-item"
 import { Button } from "@/app/_components/ui/button"
-import { db } from "@/app/_lib/prisma"
 import { quickSearchOptions } from "./_constants/search"
 import BookingItem from "./_components/booking-item"
 import Search from "./_components/search"
@@ -11,18 +10,15 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "./_lib/auth"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
-import { getConfirmedBookings } from './_data/get-confirmed-bookings'
+import { getConfirmedBookings } from "./_data/get-confirmed-bookings"
+import { getPopularBarbershops } from "./_data/get-popular-barbershops"
+import { getBarbershops } from "./_data/get-barbershops"
 
 const Home = async () => {
   const session = await getServerSession(authOptions)
-  const barbershops = await db.barbershop.findMany({})
-  const popularBarberShops = await db.barbershop.findMany({
-    orderBy: {
-      name: "desc",
-    },
-  })
-
+  const barbershops = await getBarbershops()
   const confirmedBookings = await getConfirmedBookings()
+  const popularBarbershops = await getPopularBarbershops()
 
   return (
     <div>
@@ -113,7 +109,7 @@ const Home = async () => {
         </h2>
 
         <div className="flex gap-4 overflow-auto [&::-webkit-scrollbar]:hidden">
-          {popularBarberShops.map((barbershop) => (
+          {popularBarbershops.map((barbershop) => (
             <BarberShopItem key={barbershop.id} barbershop={barbershop} />
           ))}
         </div>
