@@ -1,30 +1,19 @@
 import Link from "next/link"
 import Image from "next/image"
 import ServiceItem from "../../_components/service-item"
-import { db } from "../../_lib/prisma"
 import { notFound } from "next/navigation"
 import { Button } from "../../_components/ui/button"
 import { ChevronLeft, MapPinIcon, MenuIcon, StarIcon } from "lucide-react"
 import PhoneItem from "../../_components/phone-item"
 import { Sheet, SheetTrigger } from "../../_components/ui/sheet"
 import SidebarSheet from "../../_components/sidebar-sheet"
-
-interface BarbershopPageProps {
-  params: {
-    id: string
-  }
-}
+import {
+  BarbershopPageProps,
+  getBarbershopById,
+} from "../../_data/get-barbershop-by-id"
 
 const BarbershopPage = async ({ params }: BarbershopPageProps) => {
-  // chamar o banco de dados
-  const barbershop = await db.barbershop.findUnique({
-    where: {
-      id: params.id,
-    },
-    include: {
-      services: true,
-    },
-  })
+  const barbershop = await getBarbershopById({ params })
 
   if (!barbershop) {
     return notFound()
